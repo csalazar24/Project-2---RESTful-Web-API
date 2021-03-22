@@ -9,7 +9,7 @@ Sargent Erwin and Christopher Salazar
 ## Distribution of Work
    
      
-George: ~%
+Sargent: ~%
 Christopher: ~%
 
 ## Issues
