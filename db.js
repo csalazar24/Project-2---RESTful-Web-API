@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 mongoose.set("useUnifiedTopology", true);
 
-mongoose.connect("mongodb://localhost/studentdb",
+mongoose.connect("mongodb://localhost/pokemondb",
    { useNewUrlParser: true }
 );
 

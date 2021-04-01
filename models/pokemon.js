@@ -3,11 +3,11 @@ const mongoose = require('../db');
 const pokeSchema = new mongoose.Schema({
     no:         { type: Number, required: true },
     name:       { type: String },
-    type:       [String],
     species:    { type: String },
     height:     { type: Number },
     weight:     { type: Number},
-
+    type:       [String],
+    
 }, {
     toJSON: {
         transform: (doc, obj, options) => {
