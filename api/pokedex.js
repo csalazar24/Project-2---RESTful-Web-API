@@ -33,8 +33,8 @@ router.get('/:id', function(req, res) {
 
   // Get pokemon with given name
 // http://localhost:8000/api/pokedex/Charmander
-router.get('/:id', function(req, res) {
-    console.log('id = ' + req.params.name);
+router.get('/:name', function(req, res) {
+    console.log('name = ' + req.params.name);
     Pokemon.findById(req.params.id, function(err, poke) {
         if (err) {
             res.status(400).send(err);
