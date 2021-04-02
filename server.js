@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV.trim() === 'test' }));
+//app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV.trim() === 'test' }));
 
 app.use("/api/pokedex", require("./api/pokedex"));
  

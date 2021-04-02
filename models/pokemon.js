@@ -1,4 +1,4 @@
-const mongoose = require('../db');
+const mongoose = require("../db");
 
 const pokeSchema = new mongoose.Schema({
     no:         { type: Number, required: true },
@@ -6,7 +6,7 @@ const pokeSchema = new mongoose.Schema({
     species:    { type: String },
     height:     { type: Number },
     weight:     { type: Number},
-    type:       [String],
+    type:       [String]
     
 }, {
     toJSON: {

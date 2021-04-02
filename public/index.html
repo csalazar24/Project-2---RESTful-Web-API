@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<script>
+    window.addEventListener("DOMContentLoaded", function () {
+
+    document.querySelector("#showAll").addEventListener("click", async function getAllPokemons() {
+        
+        var html = "<ul>" ;
+	    const response = await fetch('/api/pokedex');
+        const pokemons = await response.json();
+        for (const poke of pokemons) {
+		     html += `<li> ${poke.no}, ${poke.name}, ${poke.species}, ${poke.height}, ${poke.weight}, ${poke.type}</li>`;
+        }
+        html += "</ul>";
+
+        document.querySelector("#pkmnList").innerHTML = html;
+    }); 
+
+    document.querySelector("#Insert").addEventListener("click", async function insertPokemon() {
+        const formResult = document.querySelector("#addForm");
+        const poke = { no: formResult.no, name: formResult.name, species: formResult.species, height: formResult.height, weight: formResult.weight, type: [formResult.type] };
+        const response = await fetch('/api/pokedex/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(poke)
+        });
+
+        // ok is true if status is 200-299
+        if (response.ok) {
+            const poke = await response.json();
+            console.log('Added student with ID ' + poke.id);
+        }
+        else {
+            const err = await response.json();
+            console.log('Error:', err);
+        }
+
+    }); 
+
+
+    document.querySelector("#searchBtn").addEventListener("click", async function getOnePokemon() {
+        
+        var searchInput = document.querySelector("#search").value;
+        var searchOption = document.querySelector("#searchBy");
+        var html;
+
+       if(searchOption = "ID") {
+            const response = await fetch(`/api/pokedex/${searchInput}`);
+            const poke = await response.json();
+
+            html = `${poke.no}, ${poke.name}, ${poke.species}, ${poke.height}, ${poke.weight}, ${poke.type}`
+
+           
+        }
+        else {
+            const response = await fetch(`/api/pokedex/name/${searchInput}`);
+            const pokemons = await response.json();
+
+            html = `${poke.no}, ${poke.name}, ${poke.species}, ${poke.height}, ${poke.weight}, ${poke.type}`
+
+          
+        }
+
+        document.querySelector("#pkmnList").innerHTML = html;
+
+    });
+
+
+
+});
+
+
+
+
+  
+</script>
+<html lang="en">
+    <h1>Pokedex</h1>
+    <p>
+        See Pokedex<button id="showAll">GO</button>
+    </p>
+    <p>
+        Search Pokedex by <select name="searchBy">
+                            <option value="name">Name</option>
+                            <option value="id">ID</option>
+                            </select>
+        <input type="text" id="search">
+        <button id="searchBtn">GO</button> 
+    </p>
+    <p>
+        Add Pokemon
+        <form action="api/pokedex/" method="POST" id="addForm">
+            No.:<input type="text" id="inNum">
+            Name:<input type="text" id="inName">
+            Type:<input type="text" id="inType">
+            Height:<input type="text" id="inHeight">
+            Weight:<input type="text" id="inWeight">
+            Species:<input type="text" id="inSpecies">
+            <input type="submit" id="Insert">
+        </form>
+    </p>
+    <p>
+        Delete Pokemon by Name: <input type="text"><button id="deleteBtn">Delete</button>
+    </p>
+
+
+    <div id="pkmnList"></div>
+ 
+</html>
