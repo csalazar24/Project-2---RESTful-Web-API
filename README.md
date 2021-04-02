@@ -14,4 +14,3 @@ Christopher: ~%
 
 ## Issues
 
-We do not know yet how to share the pokemon database in github
