@@ -20,8 +20,8 @@ Sargent Erwin and Christopher Salazar
 
 ## Distribution of Work
    
-Sargent: ~%
-Christopher: ~%
+Sargent: 50~%
+Christopher: 50~%
 
 
 
