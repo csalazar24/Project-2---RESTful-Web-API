@@ -16,8 +16,17 @@ window.addEventListener("DOMContentLoaded", function () {
     }); 
 
     document.querySelector("#Insert").addEventListener("click", async function insertPokemon() {
-        const formResult = document.querySelector("#addForm");
-        const poke = { no: formResult.no, name: formResult.name, species: formResult.species, height: formResult.height, weight: formResult.weight, type: [formResult.type] };
+        
+        const newNo = document.querySelector("#inNum").value;
+        const newName = document.querySelector("#inName").value; 
+        const newSpecies = document.querySelector("#inSpecies").value;
+        const newHeight = document.querySelector("#inHeight").value;
+        const newWeight = document.querySelector("#inWeight").value;
+        const newType = document.querySelector("#inType").value;
+        
+        
+        const poke = { no: `${newNo}`, name: `${newName}`, species: `${newSpecies}`, height: `${newHeight}`, weight: `${newWeight}`, type: [`${newType}`] };
+
         const response = await fetch('/api/pokedex/', {
             method: 'POST',
             headers: {
@@ -29,7 +38,7 @@ window.addEventListener("DOMContentLoaded", function () {
         // ok is true if status is 200-299
         if (response.ok) {
             const poke = await response.json();
-            console.log('Added student with ID ' + poke.id);
+            console.log('Added student with No. ' + poke.no);
         }
         else {
             const err = await response.json();

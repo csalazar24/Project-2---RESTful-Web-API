@@ -60,7 +60,6 @@ router.post('/', function(req, res) {
         height: req.body.height,
         weight: req.body.weight,
         type: req.body.type,
-      
     });
 
     pokemon.save(function(err, stu) {
