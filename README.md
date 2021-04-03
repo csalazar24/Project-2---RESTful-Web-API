@@ -10,13 +10,13 @@ Sargent Erwin and Christopher Salazar
  
 |  Resource |  Request verb | Description  | Status Code  |
 |---|---|---|---|
-|  http://localhost:8000/api/pokedex/ |   |   |   |
-| http://localhost:8000/api/pokedex/60666d9f72360717c8bd0fea  |   |   |   |
-|  http://localhost:8000/api/pokedex?name=Bulbasaur |   |   |   |
-| http://localhost:8000/api/pokedex?name=Hello  |   |   |   | 
-|   |   |   |   | 
-|   |   |   |   |
-|   |   |   |   |
+|  http://localhost:8000/api/pokedex/ |  GET |   |   |
+| http://localhost:8000/api/pokedex/60666d9f72360717c8bd0fea  | GET  |   |   |
+|  http://localhost:8000/api/pokedex?name=Bulbasaur |  GET |   |   |
+| http://localhost:8000/api/pokedex?name=Hello  | GET  |   |   | 
+|  http://localhost:8000/api/pokedex/ |  POST |   |   | 
+|  http://localhost:8000/api/pokedex/60666d9f72360717c8bd0fea |  PUT |   |   |
+| http://localhost:8000/api/pokedex/60666d9f72360717c8bd0fea  |  DELETE |   |   |
 
 ## Distribution of Work
    
