@@ -94,7 +94,7 @@ window.addEventListener("DOMContentLoaded", function () {
     }); 
 
 
-    document.querySelector("#Update").addEventListener("click", async function updateStudent() {
+    document.querySelector("#Update").addEventListener("click", async function updatePokemon() {
 
         var UpdateInputID = document.querySelector("#upID").value;
 
@@ -117,7 +117,7 @@ window.addEventListener("DOMContentLoaded", function () {
         });
 
         if (response.ok) {
-            document.querySelector("#pkmnList").innerHTML = "Pokemon Successfully Updated";
+            document.querySelector("#pkmnList2").innerHTML = "Pokemon Successfully Updated";
 	}
 	else {
 		const err = await response.json();
@@ -183,5 +183,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
 
     <div id="pkmnList"></div>
+
+    <div id="pkmnList2"></div>
  
 </html>
