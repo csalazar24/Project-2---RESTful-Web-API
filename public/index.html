@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <script>
-    window.addEventListener("DOMContentLoaded", function () {
+window.addEventListener("DOMContentLoaded", function () {
 
     document.querySelector("#showAll").addEventListener("click", async function getAllPokemons() {
         
@@ -62,13 +62,30 @@
             const poke = await response.json();
             html = `${poke[0].no}, ${poke[0].name}, ${poke[0].species}, ${poke[0].height}, ${poke[0].weight}, ${poke[0].type}`
 
-          
         }
 
         document.querySelector("#pkmnList").innerHTML = html;
 
     });
 
+    document.querySelector("#deleteBtn").addEventListener("click", async function deletePokemon() {
+
+        var deleteInput = document.querySelector("#delete").value;
+
+        const response = await fetch('/api/pokedex/' + deleteInput, {
+            method: 'DELETE',
+           
+        });
+
+    if (response.ok) {
+		console.log('Delete successful');
+	}
+	else {
+		const err = await response.json();
+		console.log('Error:', err);
+	}
+
+    }); 
 
 
 });
@@ -108,7 +125,7 @@
     </p>
 
     <p>
-        Delete Pokemon by Name: <input type="text"><button id="deleteBtn">Delete</button>
+        Delete Pokemon by Name: <input type="text" id="delete"><button id="deleteBtn">Delete</button>
     </p>
 
 
