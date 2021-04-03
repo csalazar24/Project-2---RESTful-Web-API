@@ -85,6 +85,49 @@ window.addEventListener("DOMContentLoaded", function () {
     }); 
 
 
+    document.querySelector("#deleteBtn").addEventListener("click", async function updateStudent() {
+
+        var UpdateInputID = document.querySelector("#upID").value;
+
+        const response = await fetch('/api/pokedex/' + UpdateInputID, {
+            method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+           
+        });
+
+        if (response.ok) {
+		console.log('Update successful');
+	}
+	else {
+		const err = await response.json();
+		console.log('Error:', err);
+	}
+
+    }); 
+
+//     async function updateStudent() {
+// 	const stu = { gpa: 2 };
+// 	const response = await fetch('/api/students/605b5327e7cbd378c056af3f', {
+// 		method: 'PUT',
+// 		headers: {
+// 			'Content-Type': 'application/json'
+// 		},
+// 		body: JSON.stringify(stu)
+// 	});
+
+// 	if (response.ok) {
+// 		console.log('Update successful');
+// 	}
+// 	else {
+// 		const err = await response.json();
+// 		console.log('Error:', err);
+// 	}
+// }
+    
+
+
 });
 
 
@@ -122,14 +165,14 @@ window.addEventListener("DOMContentLoaded", function () {
     <p>
         Change Pokemon
         <form action="api/pokedex/" method="POST" id="updteForm">
-            ID:<input type="text" id="IDNum">
-            No.:<input type="text" id="inNum">
-            Name:<input type="text" id="inName">
-            Type:<input type="text" id="inType">
-            Height:<input type="text" id="inHeight">
-            Weight:<input type="text" id="inWeight">
-            Species:<input type="text" id="inSpecies">
-            <input type="submit" id="Insert">
+            ID:<input type="text" id="upID">
+            No.:<input type="text" id="upNum">
+            Name:<input type="text" id="upName">
+            Type:<input type="text" id="upType">
+            Height:<input type="text" id="upHeight">
+            Weight:<input type="text" id="upWeight">
+            Species:<input type="text" id="upSpecies">
+            <input type="submit" id="Update">
         </form>
     </p>
 
