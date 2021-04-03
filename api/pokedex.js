@@ -3,7 +3,7 @@ const router = require('express').Router();
 
 
 // Get resources by criteria
-// http://localhost:8000/api/pokedex/Charmander
+// http://localhost:8000/api/pokedex?name=Bulbasaur
 router.get('/', function(req, res) {
     let query = {};
      
@@ -20,7 +20,7 @@ router.get('/', function(req, res) {
         }
     });
 });
- 
+
 // Get all pokemons
 // http://localhost:8000/api/pokedex/
 router.get("/", function(req, res) {
@@ -50,25 +50,6 @@ router.get("/", function(req, res) {
         }
     });
 });
-
-  // Get pokemon with given name
-// http://localhost:8000/api/pokedex/xxxx/Charmander
-// router.get('/:name', function(req, res) {
-//  console.log('name = ' + req.params.name);
-//   Pokemon.find(req.params.name, function(err, poke) {
-//       if (err) {
-//           res.status(400).send(err);
-//       }
-//       else if (poke) {
-//           res.json(poke);
-//       }
-//       else {
-//          res.sendStatus(404);
-//      }
-//   });
-// });
-
-
 
  //Add new Pokemon to Pokedex
 router.post('/', function(req, res) {

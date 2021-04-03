@@ -43,9 +43,13 @@
         
         var searchInput = document.querySelector("#search").value;
         var searchOption = document.querySelector("#searchBy");
+        var selectedOption = searchOption.options[searchOption.selectedIndex].value;
         var html;
 
-       if(searchOption = "ID") {
+        //var test = searchOption.options[searchOption.sele]
+
+
+       if(selectedOption == "ID") {
             const response = await fetch(`/api/pokedex/${searchInput}`);
             const poke = await response.json();
 
@@ -53,11 +57,10 @@
 
            
         }
-        else {
-            const response = await fetch(`/api/pokedex/name/${searchInput}`);
-            const pokemons = await response.json();
-
-            html = `${poke.no}, ${poke.name}, ${poke.species}, ${poke.height}, ${poke.weight}, ${poke.type}`
+        else{
+            const response = await fetch(`/api/pokedex?name=${searchInput}`);
+            const poke = await response.json();
+            html = `${poke[0].no}, ${poke[0].name}, ${poke[0].species}, ${poke[0].height}, ${poke[0].weight}, ${poke[0].type}`
 
           
         }
@@ -80,14 +83,17 @@
     <p>
         See Pokedex<button id="showAll">GO</button>
     </p>
+
     <p>
-        Search Pokedex by <select name="searchBy">
-                            <option value="name">Name</option>
-                            <option value="id">ID</option>
-                            </select>
+        <label for="searchBy"> Search Pokedex by</label>
+            <select id="searchBy">
+                    <option>Name</option>
+                    <option>ID</option>
+                </select>
         <input type="text" id="search">
         <button id="searchBtn">GO</button> 
     </p>
+
     <p>
         Add Pokemon
         <form action="api/pokedex/" method="POST" id="addForm">
@@ -100,6 +106,7 @@
             <input type="submit" id="Insert">
         </form>
     </p>
+
     <p>
         Delete Pokemon by Name: <input type="text"><button id="deleteBtn">Delete</button>
     </p>
