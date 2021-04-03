@@ -55,9 +55,6 @@ window.addEventListener("DOMContentLoaded", function () {
         var selectedOption = searchOption.options[searchOption.selectedIndex].value;
         var html;
 
-        //var test = searchOption.options[searchOption.sele]
-
-
        if(selectedOption == "ID") {
             const response = await fetch(`/api/pokedex/${searchInput}`);
             const poke = await response.json();
@@ -100,8 +97,6 @@ window.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-
   
 </script>
 <html lang="en">
@@ -123,6 +118,20 @@ window.addEventListener("DOMContentLoaded", function () {
     <p>
         Add Pokemon
         <form action="api/pokedex/" method="POST" id="addForm">
+            No.:<input type="text" id="inNum">
+            Name:<input type="text" id="inName">
+            Type:<input type="text" id="inType">
+            Height:<input type="text" id="inHeight">
+            Weight:<input type="text" id="inWeight">
+            Species:<input type="text" id="inSpecies">
+            <input type="submit" id="Insert">
+        </form>
+    </p>
+
+    <p>
+        Change Pokemon
+        <form action="api/pokedex/" method="POST" id="updteForm">
+            ID:<input type="text" id="IDNum">
             No.:<input type="text" id="inNum">
             Name:<input type="text" id="inName">
             Type:<input type="text" id="inType">
