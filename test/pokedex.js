@@ -16,7 +16,7 @@ describe('Pokedex API', () => {
         for (const pkmn of testPkmn) {
             const pokemon = new Pokemon(pkmn);
             const pkmnDoc = await pokemon.save();
-            testDocs.push(stuDoc);
+            testDocs.push(pkmnDoc);
         } 
 
     });
