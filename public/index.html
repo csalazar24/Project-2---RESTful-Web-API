@@ -22,10 +22,9 @@ window.addEventListener("DOMContentLoaded", function () {
         const newSpecies = document.querySelector("#inSpecies").value;
         const newHeight = document.querySelector("#inHeight").value;
         const newWeight = document.querySelector("#inWeight").value;
-        const newType = document.querySelector("#inType").value;
+        const newType = document.querySelector("#inType").value;    
         
-        
-        const poke = { no: `${newNo}`, name: `${newName}`, species: `${newSpecies}`, height: `${newHeight}`, weight: `${newWeight}`, type: [`${newType}`] };
+        const poke = { no: newNo, name: newName, species: newSpecies, height: newHeight, weight: newWeight, type: [newType] };
 
         const response = await fetch('/api/pokedex/', {
             method: 'POST',
@@ -77,6 +76,7 @@ window.addEventListener("DOMContentLoaded", function () {
     document.querySelector("#deleteBtn").addEventListener("click", async function deletePokemon() {
 
         var deleteInput = document.querySelector("#delete").value;
+       
 
         const response = await fetch('/api/pokedex/' + deleteInput, {
             method: 'DELETE',
@@ -84,7 +84,7 @@ window.addEventListener("DOMContentLoaded", function () {
         });
 
     if (response.ok) {
-		console.log('Delete successful');
+		document.querySelector("#pkmnList").innerHTML = "Pokemon Successfully Deleted";
 	}
 	else {
 		const err = await response.json();
@@ -94,20 +94,30 @@ window.addEventListener("DOMContentLoaded", function () {
     }); 
 
 
-    document.querySelector("#deleteBtn").addEventListener("click", async function updateStudent() {
+    document.querySelector("#Update").addEventListener("click", async function updateStudent() {
 
         var UpdateInputID = document.querySelector("#upID").value;
+
+        const newNo = document.querySelector("#upNum").value;
+        const newName = document.querySelector("#upName").value; 
+        const newSpecies = document.querySelector("#upSpecies").value;
+        const newHeight = document.querySelector("#upHeight").value;
+        const newWeight = document.querySelector("#upWeight").value;
+        const newType = document.querySelector("#upType").value;   
+
+        const poke = { no: newNo, name: newName, species: newSpecies, height: newHeight, weight: newWeight, type: [newType] };
 
         const response = await fetch('/api/pokedex/' + UpdateInputID, {
             method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json'
 		},
+        body: JSON.stringify(poke)
            
         });
 
         if (response.ok) {
-		console.log('Update successful');
+            document.querySelector("#pkmnList").innerHTML = "Pokemon Successfully Updated";
 	}
 	else {
 		const err = await response.json();
@@ -116,24 +126,6 @@ window.addEventListener("DOMContentLoaded", function () {
 
     }); 
 
-//     async function updateStudent() {
-// 	const stu = { gpa: 2 };
-// 	const response = await fetch('/api/students/605b5327e7cbd378c056af3f', {
-// 		method: 'PUT',
-// 		headers: {
-// 			'Content-Type': 'application/json'
-// 		},
-// 		body: JSON.stringify(stu)
-// 	});
-
-// 	if (response.ok) {
-// 		console.log('Update successful');
-// 	}
-// 	else {
-// 		const err = await response.json();
-// 		console.log('Error:', err);
-// 	}
-// }
     
 
 
@@ -160,7 +152,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     <p>
         Add Pokemon
-        <form action="api/pokedex/" method="POST" id="addForm">
+        <form id="addForm">
             No.:<input type="text" id="inNum">
             Name:<input type="text" id="inName">
             Type:<input type="text" id="inType">
@@ -173,7 +165,7 @@ window.addEventListener("DOMContentLoaded", function () {
 
     <p>
         Change Pokemon
-        <form action="api/pokedex/" method="POST" id="updteForm">
+        <form id="updteForm">
             ID:<input type="text" id="upID">
             No.:<input type="text" id="upNum">
             Name:<input type="text" id="upName">
