@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "set NODE_ENV=test && mocha --timeout 10000",
     "start": "nodemon server.js"
   },
   "repository": {
@@ -21,7 +21,10 @@
   },
   "homepage": "https://github.com/csalazar24/Project-2---RESTful-Web-API#readme",
   "dependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
     "express": "^4.17.1",
+    "mocha": "^8.3.2",
     "mongoose": "^5.12.3",
     "morgan": "^1.10.0",
     "node": "^15.12.0",
