@@ -158,41 +158,97 @@ window.addEventListener("DOMContentLoaded", function () {
     //-----------------------------------------------------------------------------------------------------------------------------
 });
 
-
   
 </script>
 
-
 <html lang="en">
+<style>
+h1 {
+    text-align:center;
+    color: #D22B2B;
+}
+.button-3d {
+  position:relative;
+  width: auto;
+  display:inline-block;
+  color:black;
+  text-decoration:none;
+  border-radius:5px;
+  border:solid 1px #ffcb05;
+  background:#ffcb05;
+  text-align:center;
+  padding:8px 8px 8px;
+  margin: 10px;
+  
+  -webkit-transition: all 0.1s;
+  -moz-transition: all 0.1s;
+  transition: all 0.1s;
+  
+  -webkit-box-shadow: 0px 6px 0px #c7a008;
+  -moz-box-shadow: 0px 6px 0px #c7a008;
+  box-shadow: 0px 6px 0px #c7a008;
+}
+.button-3d:active{
+    -webkit-box-shadow: 0px 2px 0px #d35400;
+    -moz-box-shadow: 0px 2px 0px #d35400;
+    box-shadow: 0px 2px 0px #d35400;
+    position:relative;
+    top:4px;
+}
+body {
+  text-align: left;
+  color:#ecf0f1; 
+  background-color: #2c3e50; 
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 20px;
+  margin-top: 20px;
+}
+.textEntry{
+    width:8%;
+    border:2px solid #aaa;
+    border-radius:4px;
+    margin:8px 0;
+    outline:none;
+    padding:8px;
+    box-sizing:border-box;
+    transition:.3s;
+    text-align: center;
+  }
+  .textEntry:focus{
+    border-color:dodgerBlue;
+    box-shadow:0 0 8px 0 dodgerBlue;
+  }
+</style>
+
     <h1>Pokedex</h1>
 
     <!-- Button to display a list with all pokemons-->
     <p>
-        See Pokedex<button id="showAll">GO</button>
+        See Pokedex <button id="showAll" href="#" class="button-3d">GO</button>
     </p>
 
     <!-- Dropdown to choose between ID and Name to search one pokemon-->
     <p>
-        <label for="searchBy"> Search Pokedex by</label>
-            <select id="searchBy">
+        <label for="searchBy"> Search Pokedex by </label>
+            <select id="searchBy" class="textEntry">
                 <option>Name</option>
                 <option>ID</option>
             </select>
-        <input type="text" id="search">
-        <button id="searchBtn">GO</button> 
+        <input type="text" id="search" class="textEntry">
+        <button id="searchBtn" href="#" class="button-3d">GO</button> 
     </p>
 
     <!-- Form to add a new pokemon-->
     <p>
         Add Pokemon
         <form id="addForm" onsubmit="return false">
-            No.:<input type="text" id="inNum">
-            Name:<input type="text" id="inName">
-            Type:<input type="text" id="inType">
-            Height:<input type="text" id="inHeight">
-            Weight:<input type="text" id="inWeight">
-            Species:<input type="text" id="inSpecies">
-            <input type="submit" id="Insert" >
+            No.: <input type="text" id="inNum" class="textEntry">
+            Name: <input type="text" id="inName" class="textEntry">
+            Type: <input type="text" id="inType" class="textEntry">
+            Height: <input type="text" id="inHeight" class="textEntry">
+            Weight: <input type="text" id="inWeight" class="textEntry">
+            Species: <input type="text" id="inSpecies" class="textEntry">
+            <input type="submit" id="Insert" href="#" class="button-3d">
         </form>
     </p>
 
@@ -200,20 +256,20 @@ window.addEventListener("DOMContentLoaded", function () {
     <p>
         Change Pokemon
         <form id="updteForm" onsubmit="return false">
-            ID:<input type="text" id="upID">
-            No.:<input type="text" id="upNum">
-            Name:<input type="text" id="upName">
-            Type:<input type="text" id="upType">
-            Height:<input type="text" id="upHeight">
-            Weight:<input type="text" id="upWeight">
-            Species:<input type="text" id="upSpecies">
-            <input type="submit" id="Update">
+            ID: <input type="text" id="upID" class="textEntry">
+            No.: <input type="text" id="upNum" class="textEntry">
+            Name: <input type="text" id="upName" class="textEntry">
+            Type: <input type="text" id="upType" class="textEntry">
+            Height: <input type="text" id="upHeight" class="textEntry">
+            Weight: <input type="text" id="upWeight" class="textEntry">
+            Species: <input type="text" id="upSpecies" class="textEntry">
+            <input type="submit" id="Update" href="#" class="button-3d">
         </form>
     </p>
 
     <!--Form to delete a pokemon with given ID-->
     <p>
-        Delete Pokemon by ID: <input type="text" id="delete"><button id="deleteBtn">Delete</button>
+        Delete Pokemon by ID: <input type="text" id="delete" class="textEntry"><button id="deleteBtn" href="#" class="button-3d">Delete</button>
     </p>
 
     <!--Div tag to display messages to the user-->
