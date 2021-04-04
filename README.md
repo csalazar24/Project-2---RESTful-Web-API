@@ -23,5 +23,27 @@ Sargent Erwin and Christopher Salazar
 Sargent: 50~%
 Christopher: 50~%
 
+Proper project configuration: Christopher & Sargent (Pair programming)
 
+Document criteria: Christopher & Sargent (Pair programming)
+
+GET all resources: Christopher
+
+GET resource by ID: Christopher
+
+GET resource by other criteria: Christopher
+
+POST resource: Sargent
+
+PUT resource: Sargent
+
+DELETE resource: Sargent
+
+Web page for interacting with API: Christopher & Sargent (Pair programming)
+
+Mocha/Chai tests: Christopher & Sargent (Pair programming)
+
+GitHub usage: Christopher
+
+Coding best practices: Christopher & Sargent (Pair programming)
 
