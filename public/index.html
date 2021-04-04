@@ -1,19 +1,30 @@
 <!DOCTYPE html>
 <script>
+
 window.addEventListener("DOMContentLoaded", function () {
+
+    //-----------------------------------------------------------------------------------------------------------------------------
+    //GET request to get all pokemons with fetch
+    //-----------------------------------------------------------------------------------------------------------------------------
 
     document.querySelector("#showAll").addEventListener("click", async function getAllPokemons() {
         
         var html = "<ul>" ;
 	    const response = await fetch('/api/pokedex');
         const pokemons = await response.json();
+
         for (const poke of pokemons) {
 		     html += `<li> ${poke.no}, ${poke.name}, ${poke.species}, ${poke.height}, ${poke.weight}, ${poke.type}</li>`;
         }
+
         html += "</ul>";
 
         document.querySelector("#pkmnList").innerHTML = html;
     }); 
+
+    //-----------------------------------------------------------------------------------------------------------------------------
+    //POST request with fetch to create new pokemons
+    //-----------------------------------------------------------------------------------------------------------------------------
 
     document.querySelector("#Insert").addEventListener("click", async function insertPokemon() {
         
@@ -27,25 +38,33 @@ window.addEventListener("DOMContentLoaded", function () {
         const poke = { no: newNo, name: newName, species: newSpecies, height: newHeight, weight: newWeight, type: [newType] };
 
         const response = await fetch('/api/pokedex/', {
+
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(poke)
+
         });
 
-        // ok is true if status is 200-299
         if (response.ok) {
+
             const poke = await response.json();
             console.log('Added student with No. ' + poke.no);
+            document.querySelector("#pkmnList").innerHTML = "Pokemon Successfully Created";
+
         }
         else {
+
             const err = await response.json();
             console.log('Error:', err);
         }
 
     }); 
 
+    //-----------------------------------------------------------------------------------------------------------------------------
+    //GET request to pokemons with selected criteria. You can can a pokemon with a given ID or a given Name
+    //-----------------------------------------------------------------------------------------------------------------------------
 
     document.querySelector("#searchBtn").addEventListener("click", async function getOnePokemon() {
         
@@ -55,14 +74,15 @@ window.addEventListener("DOMContentLoaded", function () {
         var html;
 
        if(selectedOption == "ID") {
+
             const response = await fetch(`/api/pokedex/${searchInput}`);
             const poke = await response.json();
 
             html = `${poke.no}, ${poke.name}, ${poke.species}, ${poke.height}, ${poke.weight}, ${poke.type}`
-
            
         }
         else{
+
             const response = await fetch(`/api/pokedex?name=${searchInput}`);
             const poke = await response.json();
             html = `${poke[0].no}, ${poke[0].name}, ${poke[0].species}, ${poke[0].height}, ${poke[0].weight}, ${poke[0].type}`
@@ -73,17 +93,22 @@ window.addEventListener("DOMContentLoaded", function () {
 
     });
 
+    //-----------------------------------------------------------------------------------------------------------------------------
+    //DELETE request to delete any pokemon with a given ID
+    //-----------------------------------------------------------------------------------------------------------------------------
+
     document.querySelector("#deleteBtn").addEventListener("click", async function deletePokemon() {
 
         var deleteInput = document.querySelector("#delete").value;
        
-
         const response = await fetch('/api/pokedex/' + deleteInput, {
+
             method: 'DELETE',
            
         });
 
     if (response.ok) {
+        console.log("Pokemon Successfully Deleted");
 		document.querySelector("#pkmnList").innerHTML = "Pokemon Successfully Deleted";
 	}
 	else {
@@ -93,11 +118,13 @@ window.addEventListener("DOMContentLoaded", function () {
 
     }); 
 
+    //-----------------------------------------------------------------------------------------------------------------------------
+    //PUT request to update pokemons with a given ID
+    //-----------------------------------------------------------------------------------------------------------------------------
 
     document.querySelector("#Update").addEventListener("click", async function updatePokemon() {
 
         var UpdateInputID = document.querySelector("#upID").value;
-
         const newNo = document.querySelector("#upNum").value;
         const newName = document.querySelector("#upName").value; 
         const newSpecies = document.querySelector("#upSpecies").value;
@@ -108,64 +135,71 @@ window.addEventListener("DOMContentLoaded", function () {
         const poke = { no: newNo, name: newName, species: newSpecies, height: newHeight, weight: newWeight, type: [newType] };
 
         const response = await fetch('/api/pokedex/' + UpdateInputID, {
-            method: 'PUT',
+        method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json'
 		},
+
         body: JSON.stringify(poke)
            
         });
 
         if (response.ok) {
-            document.querySelector("#pkmnList2").innerHTML = "Pokemon Successfully Updated";
-	}
-	else {
+            console.log('Pokemon Successfully Updated');
+            document.querySelector("#pkmnList").innerHTML = "Pokemon Successfully Updated";
+	    }
+	    else {
 		const err = await response.json();
 		console.log('Error:', err);
-	}
+	    }
 
-    }); 
+    });
 
-    
-
-
+    //-----------------------------------------------------------------------------------------------------------------------------
 });
 
 
   
 </script>
+
+
 <html lang="en">
     <h1>Pokedex</h1>
+
+    <!-- Button to display a list with all pokemons-->
     <p>
         See Pokedex<button id="showAll">GO</button>
     </p>
 
+    <!-- Dropdown to choose between ID and Name to search one pokemon-->
     <p>
         <label for="searchBy"> Search Pokedex by</label>
             <select id="searchBy">
-                    <option>Name</option>
-                    <option>ID</option>
-                </select>
+                <option>Name</option>
+                <option>ID</option>
+            </select>
         <input type="text" id="search">
         <button id="searchBtn">GO</button> 
     </p>
 
+    <!-- Form to add a new pokemon-->
     <p>
         Add Pokemon
-        <form id="addForm">
+        <form id="addForm" onsubmit="return false">
             No.:<input type="text" id="inNum">
             Name:<input type="text" id="inName">
             Type:<input type="text" id="inType">
             Height:<input type="text" id="inHeight">
             Weight:<input type="text" id="inWeight">
             Species:<input type="text" id="inSpecies">
-            <input type="submit" id="Insert">
+            <input type="submit" id="Insert" >
         </form>
     </p>
 
+    <!-- Form to change a pokemon-->
     <p>
         Change Pokemon
-        <form id="updteForm">
+        <form id="updteForm" onsubmit="return false">
             ID:<input type="text" id="upID">
             No.:<input type="text" id="upNum">
             Name:<input type="text" id="upName">
@@ -177,13 +211,13 @@ window.addEventListener("DOMContentLoaded", function () {
         </form>
     </p>
 
+    <!--Form to delete a pokemon with given ID-->
     <p>
-        Delete Pokemon by Name: <input type="text" id="delete"><button id="deleteBtn">Delete</button>
+        Delete Pokemon by ID: <input type="text" id="delete"><button id="deleteBtn">Delete</button>
     </p>
 
-
+    <!--Div tag to display messages to the user-->
     <div id="pkmnList"></div>
 
-    <div id="pkmnList2"></div>
  
 </html>
