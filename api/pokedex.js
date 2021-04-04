@@ -62,12 +62,12 @@ router.post('/', function(req, res) {
         type: req.body.type,
     });
 
-    pokemon.save(function(err, stu) {
+    pokemon.save(function(err, poke) {
         if (err) {
             res.status(400).send(err);
         }
         else {
-            res.status(201).json(stu);
+            res.status(201).json(poke);
         }
     });
 });

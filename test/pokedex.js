@@ -2,6 +2,7 @@ const Pokemon = require('../models/pokemon');
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../server');
+//const { doesNotReject } = require('node:assert');
 
 const should = chai.should();
 chai.use(chaiHttp);
@@ -82,7 +83,25 @@ describe('Pokedex API', () => {
                 });
         });
 
-        //it(400 status)
+        it('should return bad request error', (done) => {
+            const poke = new Pokemon({
+                no: 12345,
+                name: 'Fake',
+                species: 'False Pokemon',
+                height: 250,
+                weight: 0.5,
+                type: ['Ghost']
+            });
+            chai.request(server)
+                .get('/api/pokedex/' + poke.name)
+                .end((err, res) => {
+                    res.should.have.status(400); 
+                    done();
+                })
+        });
+
+
+
         it('should try to GET non-existent pokemon', (done) => {
             const poke = new Pokemon({
                 no: 12345,
@@ -96,6 +115,7 @@ describe('Pokedex API', () => {
                 .get('/api/pokedex/' + poke.id)
                 .end((err, res) => {
                     res.should.have.status(404); 
+                    done();
                 })
         });
     });	
@@ -120,8 +140,24 @@ describe('Pokedex API', () => {
                     done();
                 });
         });
-
-        //it(400 status)
+        //400 status
+        it('should return bad request error', (done) => {
+            const pokep = new Pokemon({
+                name: 'Fake',
+                species: false,
+                height: 250,
+                weight: 0.5,
+                type: ['Ghost']
+            });
+            chai.request(server)
+                .post('/api/pokedex')
+                .send(pokep)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                    done();
+                })
+        });
+        
     });	
 
    
@@ -153,13 +189,29 @@ describe('Pokedex API', () => {
                             res.body.should.have.property('height').eql(poke.height);
                             res.body.should.have.property('weight').eql(poke.weight);
                             res.body.should.have.property('type').eql(poke.type);
-                            res.body.should.have.property('id').eql(poke.id.toString());;
+                            res.body.should.have.property('id').eql(testDocs[0].id.toString());;
                             done();
                         });
                 });
         });
 
         //it(404 status)
+        it('should try to create with non-existent pokemon id', (done) => {
+            const poke = new Pokemon({
+                no: 12345,
+                name: 'Fake',
+                species: 'False Pokemon',
+                height: 250,
+                weight: 0.5,
+                type: ['Ghost']
+            });
+            chai.request(server)
+                .get('/api/pokedex/' + poke.id)
+                .end((err, res) => {
+                    res.should.have.status(404); 
+                    done();
+                })
+        });
 
     });
 
@@ -182,16 +234,23 @@ describe('Pokedex API', () => {
         });
 
         //it(404 status)
+        it('should try to DELETE a non-existent pokemon', (done) => {
+            const poke = new Pokemon({
+                no: 12345,
+                name: 'Fake',
+                species: 'False Pokemon',
+                height: 250,
+                weight: 0.5,
+                type: ['Ghost']
+            });
+            chai.request(server)
+                .get('/api/pokedex/' + poke.id)
+                .end((err, res) => {
+                    res.should.have.status(404); 
+                    done();
+                })
+        });
     });
-
-
-
-
-
-
-
-
-
 
 
 });
