@@ -23,7 +23,7 @@ Sargent Erwin and Christopher Salazar
 Sargent: 50~%
 Christopher: 50~%
 
-Proper project configuration: Christopher & Sargent (Pair programming)
+Proper project configuration:| Christopher & Sargent (Pair programming)
 
 Document criteria: Christopher & Sargent (Pair programming)
 
