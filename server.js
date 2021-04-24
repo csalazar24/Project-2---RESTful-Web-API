@@ -6,7 +6,13 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
-app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV.trim() === 'test' }));
+//app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV.trim() === 'test' }));
+
+// //app.use(morgan('dev', { skip: (req, res) => process.env.NODE_ENV.trim() === 'test' }));
+app.use("/api/pokedex", function(req, res, next) {
+    res.set("Access-Control-Allow-Origin", "*");
+    next();
+});
 
 app.use("/api/pokedex", require("./api/pokedex"));
  
